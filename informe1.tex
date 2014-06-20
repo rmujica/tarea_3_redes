@@ -1,0 +1,115 @@
+\documentclass[letterpaper,10pt,onecolumn,titlepage]{article}
+\usepackage[utf8]{inputenc} %Para no tener tener que escapar letras como Ã± al momento de escribir texto.
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{listings}
+\usepackage{color}
+\renewcommand{\lstlistingname}{Programa}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{alltt}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage[spanish]{babel}
+\usepackage[letterpaper]{geometry}
+
+\floatstyle{ruled}
+\newfloat{poutput}{thp}{lop}
+\floatname{poutput}{Salida}
+
+\floatstyle{ruled}
+\newfloat{prog}{thp}{lop}
+\floatname{prog}{Programa}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=none,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+}
+
+\title{ILI256 -- Redes de Computadores}
+\author{Claudia Escobar\\201073562-1\\claudia.escobarr@alumnos.usm.cl\and René Mujica\\201073502-8\\rene.mujica@alumnos.usm.cl}
+\date{20 de Junio de 2014}
+
+\begin{document}
+  \maketitle
+
+  \section{Pregunta 1}
+  Los tests se hicieron desde el Laboratorio de Programación Avanzada de la UTFSM San Joaquín, que tiene salida a Internet desde Valparaíso a través de una red interna.
+
+  \subsection{http://moodle.inf.utfsm.cl/}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a Moodle de Informática.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/moodle.png}
+    \label{fig:moodle}
+  \end{figure}
+  En este caso el servidor de Moodle se encuentra dentro de la misma red, por lo que no hay saltos considerables.
+
+  \subsection{http://google.cl/}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a Google.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/google.png}
+    \label{fig:google}
+  \end{figure}
+  Aquí notamos que hay una ruta casi directa para llegar a Google en Mountain View, Estados Unidos, a la que llega de un salto internacional.
+
+  \subsection{http://cime.cl/}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a Cime.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/cime.png}
+    \label{fig:cime}
+  \end{figure}
+  Desde Valparaíso llegamos a Engelwood, Estados Unidos. Haciendo un análisis whois a la primera dirección IP se concluye que ese nodo de llegada pertenece a NTT America, filial de la empresa semi-estatal japonesa NTT. Luego de muchos rebotes, llegamos a la dirección 107.170.72.180. Haciendo un whois a tal dirección, podemos ver que pertenece a DigitalOcean, por lo que asumimos que Cime está alojado en dicho proveedor.
+
+  \subsection{http://wikipedia.com/}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a Wikipedia.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/wikipedia.png}
+    \label{fig:wiki}
+  \end{figure}
+  Desde Valparaíso llegamos al mismo punto en Engelwood. Luego, se va directamente y sin muchos saltos a San Francisco, precisamente a la dirección 208.80.154.224, que pertenece a Wikimedia Foundation, fundación a la que pertenece Wikipedia.
+
+  \subsection{http://www.chile.embassy.gov.au/}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a la embajada de Australia en Chile, parte 1.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/au1.png}
+    \label{fig:au1}
+  \end{figure}
+  \begin{figure}[H]
+    \caption{Ruta tomada para llegar a la embajada de Australia en Chile, parte 2.}
+    \centering
+    \includegraphics[width=1\textwidth]{fotos/au2.png}
+    \label{fig:au2}
+  \end{figure}
+  En este caso, hay un pequeño salto mal atribuido a Chicago (la dirección IP es local), y luego se llega a Nueva York, desde donde sale a Francia a través del proveedor GTT (que antes era Tinet) y luego a Japón vía Pacnet, que es el proveedor más grande del Asia Pacífico y Australia. En Japón da algunos saltos que no llegan a resolver en ningún sitio, por lo que se asume que hay un Firewall entre el proveedor de entrada en Japón y el servidor que presumiblemente está en Australia.
+
+\end{document}
